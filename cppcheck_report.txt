@@ -1,0 +1,89 @@
+MiniProject/NorvigSudoku.cpp:12:9: warning: Member variable 'Square::commitVal' is not initialized in the constructor. [uninitMemberVar]
+        Square(){
+        ^
+MiniProject/NorvigSudoku.cpp:19:14: style:inconclusive: Technically the member function 'Square::printPossibleValues' can be const. [functionConst]
+        void printPossibleValues(){
+             ^
+MiniProject/NorvigSudoku.cpp:39:13: style:inconclusive: Technically the member function 'Square::getCommitValue' can be const. [functionConst]
+        int getCommitValue(){
+            ^
+MiniProject/NorvigSudoku.cpp:43:13: style:inconclusive: Technically the member function 'Square::getNumberOfPossibles' can be const. [functionConst]
+        int getNumberOfPossibles(){
+            ^
+WeekOne/DayFive/ShapeComp.cpp:15:9: style: Class 'Circle' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+        Circle(int radius){
+        ^
+WeekOne/DayFive/ShapeComp.cpp:33:9: style: Class 'Square' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+        Square(int side){
+        ^
+WeekOne/DayFive/ShapeComp.cpp:41:9: style: Class 'Triangle' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+        Triangle(int side) {
+        ^
+WeekOne/DayFour/Assignment/ServiceAdmin.cpp:46:5: warning: Member variable 'record::payMeth' is not initialized in the constructor. [uninitMemberVar]
+    record(int _recordId):recordId(_recordId){}
+    ^
+WeekOne/DayFour/Assignment/ServiceAdmin.cpp:22:10: style:inconclusive: Technically the member function 'part::printPartnumber' can be const. [functionConst]
+    void printPartnumber(){
+         ^
+WeekOne/DayFour/Assignment/ServiceAdmin.cpp:32:11: style:inconclusive: Technically the member function 'service::printServiceType' can be const. [functionConst]
+    void  printServiceType(){
+          ^
+WeekOne/DayFour/Assignment/ServiceAdmin.cpp:73:10: style:inconclusive: Technically the member function 'record::getPaymentMethod' can be const. [functionConst]
+    void getPaymentMethod(){
+         ^
+WeekOne/DayFour/Assignment/ServiceAdmin.cpp:21:5: style: Class 'part' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    part(int _partNumber):partNumber(_partNumber){}
+    ^
+WeekOne/DayFour/Assignment/ServiceAdmin.cpp:31:5: style: Class 'service' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    service(std::string _serviceType): serviceType(_serviceType){}
+    ^
+WeekOne/DayFour/Assignment/ServiceAdmin.cpp:46:5: style: Class 'record' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    record(int _recordId):recordId(_recordId){}
+    ^
+WeekOne/DayFour/Assignment/ServiceAdmin.cpp:31:25: performance: Function parameter '_serviceType' should be passed by const reference. [passedByValue]
+    service(std::string _serviceType): serviceType(_serviceType){}
+                        ^
+WeekOne/DayOne/BonusAssignment/NumberGuess.cpp:7:9: style: The scope of the variable 'incVar' can be reduced. [variableScope]
+    int incVar, number = 64, NbrOfQuestion = 1;
+        ^
+WeekOne/DayTwo/AssignmentOne/RandNumber.cpp:15:14: error: Uninitialized variable: m [uninitvar]
+    int arr2[m];
+             ^
+WeekOne/DayTwo/AssignmentOne/RandNumber.cpp:26:25: error: Uninitialized variable: m [uninitvar]
+    for (int i = 0; i < m; i++){
+                        ^
+WeekOne/DayTwo/AssignmentOne/RandNumber.cpp:11:12: style: Variable 'm' is not assigned a value. [unassignedVariable]
+    int n, m;
+           ^
+WeekOne/DayTwo/AssignmentOne/RandNumber2.cpp:7:18: style: Variable 'n' is assigned a value that is never used. [unreadVariable]
+    size_t m=8, n=9, k=11;
+                 ^
+WeekOne/DayTwo/AssignmentOne/RandNumber2.cpp:7:23: style: Variable 'k' is assigned a value that is never used. [unreadVariable]
+    size_t m=8, n=9, k=11;
+                      ^
+WeekOne/DayTwo/AssignmentOne/RandNumber2.cpp:10:27: style: Variable 'Array' is assigned a value that is never used. [unreadVariable]
+    unsigned int ***Array = new unsigned int **[m];
+                          ^
+WeekOne/DayTwo/LearningEnums.cpp:9:16: style: Condition 'payMeth==PaymentMethod::Cash' is always true [knownConditionTrueFalse]
+    if(payMeth == PaymentMethod::Cash){
+               ^
+WeekOne/DayTwo/LearningEnums.cpp:5:42: note: Assignment 'payMeth=PaymentMethod::Cash', assigned value is 2
+    PaymentMethod payMeth = PaymentMethod::Cash;
+                                         ^
+WeekOne/DayTwo/LearningEnums.cpp:9:16: note: Condition 'payMeth==PaymentMethod::Cash' is always true
+    if(payMeth == PaymentMethod::Cash){
+               ^
+WeekOne/DayTwo/LearningPointers.cpp:7:5: error: Memory leak: b [memleak]
+    b = &a;
+    ^
+MiniProject/NorvigSudoku.cpp:8:1: error: The one definition rule is violated, different classes/structs have the same name 'Square' [ctuOneDefinitionRuleViolation]
+class Square{
+^
+WeekOne/DayFive/ShapeComp.cpp:31:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
+class Square: public Shape{
+^
+MiniProject/NorvigSudoku.cpp:8:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
+class Square{
+^
+nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingIncludeSystem]
+
