@@ -89,18 +89,19 @@ void checkForUniqueInUnits(Square (&grid)[9][9], const int baseRow, const int ba
                     if(grid[row][baseCol].possibleValues.size()==0){
                         if(value == grid[row][baseCol].getCommitValue()){
                             check = false;
-                            goto checkRow;
+                            goto endCheckCol;
                         }
                     }
                     for(int peerValue : grid[row][baseCol].possibleValues){
                         if(value == peerValue){
                             check = false;
-                            goto checkRow;
-                            //return;
+                            goto endCheckCol;
+                            
                         }
                     }
                 }
             }
+            endCheckCol:
             if (check){
                 grid[baseRow][baseCol].commitValue(value);
                 grid[baseRow][baseCol].clearPossibles();
@@ -108,24 +109,25 @@ void checkForUniqueInUnits(Square (&grid)[9][9], const int baseRow, const int ba
                 return;
             }
             //Check in Row
-            checkRow:
+            
             check = true;
             for(int col = 0; col < 9; col++){
                 if(col != baseCol){
                     if(grid[baseRow][col].possibleValues.size() == 0){
                         if(value == grid[baseRow][col].getCommitValue()){
                             check = false;
-                            goto checkBox;
+                            goto endCheckRow;
                         }
                     }
                     for(int peerValue : grid[baseRow][col].possibleValues){
                         if(value == peerValue){
                             check = false;
-                            goto checkBox;
+                            goto endCheckRow;
                         }
                     }
                 }
             }
+            endCheckRow:
             if(check){
                 grid[baseRow][baseCol].commitValue(value);
                 grid[baseRow][baseCol].clearPossibles();
@@ -134,7 +136,6 @@ void checkForUniqueInUnits(Square (&grid)[9][9], const int baseRow, const int ba
             }
             //Check in Box
             
-            checkBox:
             check = true;
             int box_start_row =  baseRow - baseRow % 3;
             int box_start_col = baseCol - baseCol % 3;
@@ -143,23 +144,27 @@ void checkForUniqueInUnits(Square (&grid)[9][9], const int baseRow, const int ba
                     if(box_start_row + row != baseRow || box_start_col + col != baseCol){
                         if(grid[box_start_row + row ][box_start_col + col].possibleValues.size() == 0){
                             if(value == grid[box_start_row + row ][box_start_col + col].getCommitValue()){
-                                check = false;            
+                                check = false;
+                                goto endCheckBox;            
                             }
                         }
                         for (int peerValue : grid[box_start_row + row ][box_start_col + col].possibleValues){
                                 if(value == peerValue){
                                     check = false;
+                                    goto endCheckBox;
                                 }              
                         }  
                     }
                 }
-            }    
+            }
+            endCheckBox:   
             if(check){
                 grid[baseRow][baseCol].commitValue(value);
                 grid[baseRow][baseCol].clearPossibles();
                 removeInPeers(grid, baseRow, baseCol, value);
                 return;
             }
+            
         }
     
     } 
@@ -234,23 +239,6 @@ int main(int argc, char ** argv){
             }
         }
     }
-
-    /*
-    std::cout << "After applying rule (1) "<< std::endl;
-    for(int i=0; i<9; i++){
-        for(int j=0; j < 9; j++){
-            grid[i][j].printPossibleValues();
-            std::cout << " . ";
-        }
-        std::cout << std::endl;
-    }
-    
-    //Applying rule (2)
-    for (int i=0; i<9; i++){
-        for(int j=0; j < 9; j++){
-            checkForUniqueInUnits(grid, i,j);
-        }
-    }*/
     
     std::cout << "------------------------------------------------------------------------------------------------------------" << std::endl;
     std::cout << "After applying rule (1) & (2) "<< std::endl;
