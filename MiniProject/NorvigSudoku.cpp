@@ -4,6 +4,8 @@
 #include<vector>
 #include <algorithm>
 #include <iomanip>
+#include <chrono>
+
 
 class Square{
     public:
@@ -225,8 +227,10 @@ void removeInPeers(Square (&grid)[9][9], const int baseRow, const int  baseCol, 
 }
 
 int main(int argc, char ** argv){
+    
     int SudokuMatrix[9][9];
     InputSudoku(SudokuMatrix);
+    auto start = std::chrono::high_resolution_clock::now();
     Square grid[9][9];
 
     //Applying rule (1) & (2)
@@ -249,12 +253,11 @@ int main(int argc, char ** argv){
         }
         std::cout << std::endl;
     }
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+    std::cout << "Time of execution: " << duration.count() << " microseconds" << std::endl;
+
 
     return 0;
 }
-
-
-
-
-
-
