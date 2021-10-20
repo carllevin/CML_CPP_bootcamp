@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include<sstream>
+#include <chrono>
+
 
 #define GRID_FULL std::make_pair(9, 9)
 
@@ -180,6 +182,8 @@ void printSudoku(int **SudokuMatrix){
 int main (int argc, char ** argv) { 
     //Fetch a sudoku puzzle
     int **SudokuMatrix = InputSudoku();
+	//Start timer
+	auto start = std::chrono::high_resolution_clock::now();
     //Print puzzle
     std::cout<< "Input puzzle:" <<std::endl;  
     printSudoku(SudokuMatrix);
@@ -188,6 +192,11 @@ int main (int argc, char ** argv) {
     //Print solution 
     std::cout<< "Solution:" <<std::endl;
     printSudoku(SudokuMatrix);
+	//Stop timer
+	auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+    std::cout << "Time of execution: " << duration.count() << " microseconds" << std::endl;
 
     return 0;
 }
