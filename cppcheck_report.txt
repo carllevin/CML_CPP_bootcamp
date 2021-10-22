@@ -106,6 +106,24 @@ void compareShapes(T &_a, T &_b){
 WeekThree/ShapeCompareTemplate.cpp:60:30: style: Parameter '_b' can be declared with const [constParameter]
 void compareShapes(T &_a, T &_b){
                              ^
+WeekThree/Thursday/Assignment2.cpp:14:14: style:inconclusive: Same expression used in consecutive assignments of 'front' and 'rear'. [duplicateAssignExpression]
+    uint16_t front = 1*150;
+             ^
+WeekThree/Thursday/Assignment2.cpp:15:14: note: Same expression used in consecutive assignments of 'front' and 'rear'.
+    uint16_t rear = 1*150;
+             ^
+WeekThree/Thursday/Assignment2.cpp:14:14: note: Same expression used in consecutive assignments of 'front' and 'rear'.
+    uint16_t front = 1*150;
+             ^
+WeekThree/Thursday/Assignment2.cpp:15:14: style:inconclusive: Same expression used in consecutive assignments of 'rear' and 'right'. [duplicateAssignExpression]
+    uint16_t rear = 1*150;
+             ^
+WeekThree/Thursday/Assignment2.cpp:16:14: note: Same expression used in consecutive assignments of 'rear' and 'right'.
+    uint16_t right = 1*150;
+             ^
+WeekThree/Thursday/Assignment2.cpp:15:14: note: Same expression used in consecutive assignments of 'rear' and 'right'.
+    uint16_t rear = 1*150;
+             ^
 WeekThree/WordsQuantity.cpp:11:9: style: The scope of the variable 'quantity' can be reduced. [variableScope]
     int quantity;
         ^
