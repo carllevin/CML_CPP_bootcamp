@@ -4,15 +4,48 @@ MiniProject/NorvigSudoku.cpp:15:9: warning: Member variable 'Square::commitVal' 
 MiniProject/NorvigSudoku.cpp:22:14: style:inconclusive: Technically the member function 'Square::printPossibleValues' can be const. [functionConst]
         void printPossibleValues(){
              ^
-MiniProject/NorvigSudoku.cpp:42:13: style:inconclusive: Technically the member function 'Square::getCommitValue' can be const. [functionConst]
+MiniProject/NorvigSudoku.cpp:43:13: style:inconclusive: Technically the member function 'Square::getCommitValue' can be const. [functionConst]
         int getCommitValue(){
             ^
-MiniProject/NorvigSudoku.cpp:46:13: style:inconclusive: Technically the member function 'Square::getNumberOfPossibles' can be const. [functionConst]
+MiniProject/NorvigSudoku.cpp:47:13: style:inconclusive: Technically the member function 'Square::getNumberOfPossibles' can be const. [functionConst]
         int getNumberOfPossibles(){
             ^
-MiniProject/NorvigSudoku.cpp:52:52: performance: Function parameter '_possibleValues' should be passed by const reference. [passedByValue]
+MiniProject/NorvigSudoku.cpp:53:52: performance: Function parameter '_possibleValues' should be passed by const reference. [passedByValue]
         void assignPossibleValues(std::vector<int> _possibleValues){
                                                    ^
+MiniProject/NorvigSudoku2.cpp:15:9: warning: Member variable 'Square::commitVal' is not initialized in the constructor. [uninitMemberVar]
+        Square(){
+        ^
+MiniProject/NorvigSudoku2.cpp:21:14: style:inconclusive: Technically the member function 'Square::printPossibleValues' can be const. [functionConst]
+        void printPossibleValues(){
+             ^
+MiniProject/NorvigSudoku2.cpp:42:13: style:inconclusive: Technically the member function 'Square::getCommitValue' can be const. [functionConst]
+        int getCommitValue(){
+            ^
+MiniProject/NorvigSudoku2.cpp:45:13: style:inconclusive: Technically the member function 'Square::getNumberOfPossibles' can be const. [functionConst]
+        int getNumberOfPossibles(){
+            ^
+MiniProject/NorvigSudoku3.cpp:15:9: warning: Member variable 'Square::commitVal' is not initialized in the constructor. [uninitMemberVar]
+        Square(){
+        ^
+MiniProject/NorvigSudoku3.cpp:21:14: style:inconclusive: Technically the member function 'Square::printPossibleValues' can be const. [functionConst]
+        void printPossibleValues(){
+             ^
+MiniProject/NorvigSudoku3.cpp:42:13: style:inconclusive: Technically the member function 'Square::getCommitValue' can be const. [functionConst]
+        int getCommitValue(){
+            ^
+MiniProject/NorvigSudoku3.cpp:45:13: style:inconclusive: Technically the member function 'Square::getNumberOfPossibles' can be const. [functionConst]
+        int getNumberOfPossibles(){
+            ^
+MiniProject/NorvigSudoku4.cpp:22:14: style:inconclusive: Technically the member function 'Square::printPossibleValues' can be const. [functionConst]
+        void printPossibleValues(){
+             ^
+MiniProject/NorvigSudoku4.cpp:43:13: style:inconclusive: Technically the member function 'Square::getCommitValue' can be const. [functionConst]
+        int getCommitValue(){
+            ^
+MiniProject/NorvigSudoku4.cpp:46:13: style:inconclusive: Technically the member function 'Square::getNumberOfPossibles' can be const. [functionConst]
+        int getNumberOfPossibles(){
+            ^
 WeekOne/DayFive/ShapeComp.cpp:15:9: style: Class 'Circle' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
         Circle(int radius){
         ^
@@ -79,7 +112,7 @@ WeekOne/DayTwo/LearningEnums.cpp:9:16: note: Condition 'payMeth==PaymentMethod::
 WeekOne/DayTwo/LearningPointers.cpp:7:5: error: Memory leak: b [memleak]
     b = &a;
     ^
-WeekThree/RandomDuplicate.cpp:11:9: style: The scope of the variable 'randNumber' can be reduced. [variableScope]
+WeekThree/RandomDuplicate.cpp:12:9: style: The scope of the variable 'randNumber' can be reduced. [variableScope]
     int randNumber;
         ^
 WeekThree/ShapeCompareTemplate.cpp:9:14: style:inconclusive: Technically the member function 'Shape::operator>' can be const. [functionConst]
@@ -100,12 +133,6 @@ WeekThree/ShapeCompareTemplate.cpp:45:9: style: Class 'Square' has a constructor
 WeekThree/ShapeCompareTemplate.cpp:53:9: style: Class 'Triangle' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
         Triangle(int side) {
         ^
-WeekThree/ShapeCompareTemplate.cpp:60:23: style: Parameter '_a' can be declared with const [constParameter]
-void compareShapes(T &_a, T &_b){
-                      ^
-WeekThree/ShapeCompareTemplate.cpp:60:30: style: Parameter '_b' can be declared with const [constParameter]
-void compareShapes(T &_a, T &_b){
-                             ^
 WeekThree/Thursday/Assignment2.cpp:14:14: style:inconclusive: Same expression used in consecutive assignments of 'front' and 'rear'. [duplicateAssignExpression]
     uint16_t front = 1*150;
              ^
@@ -127,6 +154,33 @@ WeekThree/Thursday/Assignment2.cpp:15:14: note: Same expression used in consecut
 WeekThree/WordsQuantity.cpp:11:9: style: The scope of the variable 'quantity' can be reduced. [variableScope]
     int quantity;
         ^
+MiniProject/NorvigSudoku.cpp:11:1: error: The one definition rule is violated, different classes/structs have the same name 'Square' [ctuOneDefinitionRuleViolation]
+class Square{
+^
+MiniProject/NorvigSudoku2.cpp:11:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
+class Square{
+^
+MiniProject/NorvigSudoku.cpp:11:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
+class Square{
+^
+MiniProject/NorvigSudoku.cpp:11:1: error: The one definition rule is violated, different classes/structs have the same name 'Square' [ctuOneDefinitionRuleViolation]
+class Square{
+^
+MiniProject/NorvigSudoku3.cpp:11:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
+class Square{
+^
+MiniProject/NorvigSudoku.cpp:11:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
+class Square{
+^
+MiniProject/NorvigSudoku.cpp:11:1: error: The one definition rule is violated, different classes/structs have the same name 'Square' [ctuOneDefinitionRuleViolation]
+class Square{
+^
+MiniProject/NorvigSudoku4.cpp:11:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
+class Square{
+^
+MiniProject/NorvigSudoku.cpp:11:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
+class Square{
+^
 MiniProject/NorvigSudoku.cpp:11:1: error: The one definition rule is violated, different classes/structs have the same name 'Square' [ctuOneDefinitionRuleViolation]
 class Square{
 ^
@@ -154,7 +208,7 @@ class Square: public Shape{
 MiniProject/NorvigSudoku.cpp:11:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
 class Square{
 ^
-MiniProject/NorvigSudoku.cpp:52:0: style: The function 'assignPossibleValues' is never used. [unusedFunction]
+MiniProject/NorvigSudoku.cpp:53:0: style: The function 'assignPossibleValues' is never used. [unusedFunction]
 
 ^
 nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingIncludeSystem]
