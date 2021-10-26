@@ -4,6 +4,7 @@
 /* Generaterandomnumbersbetween0-33,tenthousandtimes,thenprinthowmanyduplicatesofeachnumber
 youhavegenerated--printinascendingorder. */
 
+//Fix it with a map. Or was it multimap?
 
 int main() {
     std::vector<int> duplicates(34);

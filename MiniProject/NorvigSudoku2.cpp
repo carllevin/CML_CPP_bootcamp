@@ -18,7 +18,6 @@ class Square{
         void removePossibleValue(int value){
             possibleValues.erase(std::remove(possibleValues.begin(), possibleValues.end(), value), possibleValues.end());
         };
-
         void printPossibleValues(){
             if (possibleValues.size() > 0){
                 for(int i = 0; i < possibleValues.size(); i++){
@@ -43,16 +42,12 @@ class Square{
         int getCommitValue(){
             return commitVal;
         }
-
         int getNumberOfPossibles(){
             return possibleValues.size();
         };
         void clearPossibles(){
             this->possibleValues.clear();
         } 
-        void assignPossibleValues(std::vector<int> _possibleValues){
-            this->possibleValues = _possibleValues;
-        }
 };
 
 void InputSudoku(int (&SudokuMatrix)[9][9]){
@@ -84,7 +79,7 @@ void InputSudoku(int (&SudokuMatrix)[9][9]){
     infile.close();
 }
 
-bool used_in_row(Square (&grid)[9][9], int row, int value){
+bool used_in_row(Square **grid, int row, int value){
 	for (int col = 0; col < 9; col++)
 		if (grid[row][col].getCommitValue() == value){
 			return true;
@@ -92,7 +87,7 @@ bool used_in_row(Square (&grid)[9][9], int row, int value){
 	return false;
 }
 
-bool used_in_col(Square (&grid)[9][9], int col, int value){
+bool used_in_col(Square **grid, int col, int value){
 	for (int row = 0; row < 9; row++)
 		if (grid[row][col].getCommitValue() == value){
 			return true;
@@ -100,7 +95,7 @@ bool used_in_col(Square (&grid)[9][9], int col, int value){
 	return false;
 }
 
-bool used_in_box(Square (&grid)[9][9], int box_start_rpw, int box_start_col, int value){
+bool used_in_box(Square **grid, int box_start_rpw, int box_start_col, int value){
 	for (int row = 0; row < 3; row++)
 		for (int col = 0; col < 3; col++)
 			if (grid[row + box_start_rpw][col + box_start_col].getCommitValue()  == value){
@@ -109,19 +104,18 @@ bool used_in_box(Square (&grid)[9][9], int box_start_rpw, int box_start_col, int
 	return false;
 }
 
+bool isSafe(Square **grid, int row, int col, int num){
 // Returns a boolean which indicates whether it will be legal to assign
 // num to the given row,col location.
-bool isSafe(Square (&grid)[9][9], int row, int col, int num){
 
 	return !used_in_row(grid, row, num) &&
 		!used_in_col(grid, col, num) &&
 		!used_in_box(grid, row - row % 3, col - col % 3, num);
 }
 
-void removeInPeers(Square (&grid)[9][9], const int baseRow,  const int  baseCol,  const int value);
+void removeInPeers(Square **grid, const int baseRow,  const int  baseCol,  const int value);
 
-
-void checkForUniqueInUnits(Square (&grid)[9][9], const int baseRow, const int baseCol){
+void checkForUniqueInUnits(Square **grid, const int baseRow, const int baseCol){
     if (grid[baseRow][baseCol].getNumberOfPossibles() > 1){
         for(int value : grid[baseRow][baseCol].possibleValues){
             bool check = true;
@@ -213,7 +207,7 @@ void checkForUniqueInUnits(Square (&grid)[9][9], const int baseRow, const int ba
 
 }
 
-void removeInPeers(Square (&grid)[9][9], const int baseRow, const int  baseCol, const int value){
+void removeInPeers(Square **grid, const int baseRow, const int  baseCol, const int value){
     
     //Remove value from peers in box-unit
     int box_start_row =  baseRow - baseRow % 3;
@@ -267,9 +261,9 @@ void removeInPeers(Square (&grid)[9][9], const int baseRow, const int  baseCol, 
     
 }
 
-void removeInPeersGuess(Square (&grid)[9][9], const int baseRow, const int  baseCol, const int value);
+bool removeInPeersGuess(Square **grid, const int baseRow, const int  baseCol, const int value);
 
-void checkForUniqueInUnitsGuess(Square (&grid)[9][9], const int baseRow, const int baseCol){
+bool checkForUniqueInUnitsGuess(Square **grid, const int baseRow, const int baseCol){
     if (grid[baseRow][baseCol].getNumberOfPossibles() > 1){
         for(int value : grid[baseRow][baseCol].possibleValues){
             bool check = true;
@@ -296,12 +290,14 @@ void checkForUniqueInUnitsGuess(Square (&grid)[9][9], const int baseRow, const i
                 if(isSafe(grid, baseRow , baseCol, value)){ 
                     grid[baseRow][baseCol].commitValue(value);
                     grid[baseRow][baseCol].clearPossibles();
-                    removeInPeersGuess(grid, baseRow, baseCol, value);
+                    if(!removeInPeersGuess(grid, baseRow, baseCol, value)){
+                        return false;
+                    }
+                    
                 }
-                return;
+                return true;
             }
             //Check in Row
-            
             check = true;
             for(int col = 0; col < 9; col++){
                 if(col != baseCol){
@@ -324,12 +320,13 @@ void checkForUniqueInUnitsGuess(Square (&grid)[9][9], const int baseRow, const i
                 if(isSafe(grid, baseRow , baseCol, value)){ 
                     grid[baseRow][baseCol].commitValue(value);
                     grid[baseRow][baseCol].clearPossibles();
-                    removeInPeersGuess(grid, baseRow, baseCol, value);
+                    if(!removeInPeersGuess(grid, baseRow, baseCol, value)){
+                        return false;
+                    }
                 }
-                return;
+                return true;
             }
             //Check in Box
-            
             check = true;
             int box_start_row =  baseRow - baseRow % 3;
             int box_start_col = baseCol - baseCol % 3;
@@ -356,19 +353,20 @@ void checkForUniqueInUnitsGuess(Square (&grid)[9][9], const int baseRow, const i
                 if(isSafe(grid, baseRow , baseCol, value)){ 
                     grid[baseRow][baseCol].commitValue(value);
                     grid[baseRow][baseCol].clearPossibles();
-                    removeInPeersGuess(grid, baseRow, baseCol, value);
+                    if(!removeInPeersGuess(grid, baseRow, baseCol, value)){
+                        return false;
+                    }
                 }
-                return;
+                return true;
             }
             
         }
     
     } 
-
+    return true;
 }
 
-
-void removeInPeersGuess(Square (&grid)[9][9], const int baseRow, const int  baseCol, const int value){
+bool removeInPeersGuess(Square **grid, const int baseRow, const int  baseCol, const int value){
     
     //Remove value from peers in box-unit
     int box_start_row =  baseRow - baseRow % 3;
@@ -377,15 +375,22 @@ void removeInPeersGuess(Square (&grid)[9][9], const int baseRow, const int  base
     for (int row = 0; row < 3; row++){
 		for (int col = 0; col < 3; col++){
             if(box_start_row + row != baseRow || box_start_col + col != baseCol){
-                
+                if(grid[box_start_row + row ][box_start_col+col].getNumberOfPossibles() == 1 && grid[box_start_row + row ][box_start_col+col].possibleValues[0] == value ){
+                    return false;
+                }                
                 grid[box_start_row + row ][box_start_col+col].removePossibleValue(value);
-                checkForUniqueInUnitsGuess(grid, box_start_row + row ,box_start_col+col);
+
+                if(!checkForUniqueInUnitsGuess(grid, box_start_row + row ,box_start_col+col)){
+                    return false;
+                }
                 
                 if(grid[box_start_row + row][box_start_col+col].getNumberOfPossibles() == 1){
                     if(isSafe(grid, box_start_row + row, box_start_col+col, grid[box_start_row + row][box_start_col+col].possibleValues[0])){    
                         grid[box_start_row + row][box_start_col+col].commitValue(grid[box_start_row + row][box_start_col+col].possibleValues[0]);
                         grid[box_start_row + row][box_start_col+col].clearPossibles();
-                        removeInPeersGuess(grid,box_start_row + row,box_start_col+col, grid[box_start_row + row][box_start_col+col].getCommitValue());
+                        if(!removeInPeersGuess(grid,box_start_row + row,box_start_col+col, grid[box_start_row + row][box_start_col+col].getCommitValue())){
+                            return false;
+                        }
                     } 
                 }    
             }
@@ -395,13 +400,22 @@ void removeInPeersGuess(Square (&grid)[9][9], const int baseRow, const int  base
     //Remove value from peers in col-unit
     for(int row = 0; row < 9; row++){
         if(row != baseRow){
+            if(grid[row][baseCol].getNumberOfPossibles() == 1 && grid[row][baseCol].possibleValues[0] == value){
+                return false;
+            }
             grid[row][baseCol].removePossibleValue(value);
-            checkForUniqueInUnitsGuess(grid, row,baseCol);
+
+            if(!checkForUniqueInUnitsGuess(grid, row,baseCol)){
+                return false;
+            };
+
             if(grid[row][baseCol].getNumberOfPossibles() == 1){
                 if(isSafe(grid, row , baseCol, grid[row][baseCol].possibleValues[0])){ 
                     grid[row][baseCol].commitValue(grid[row][baseCol].possibleValues[0]);
                     grid[row][baseCol].clearPossibles();  
-                    removeInPeersGuess(grid, row, baseCol,grid[row][baseCol].getCommitValue());
+                    if(!removeInPeersGuess(grid, row, baseCol,grid[row][baseCol].getCommitValue())){
+                        return false;
+                    }
                 }
             }    
         }
@@ -410,24 +424,31 @@ void removeInPeersGuess(Square (&grid)[9][9], const int baseRow, const int  base
     //Remove value from peers in row-unit
     for(int col = 0; col < 9; col++){
         if(col != baseCol){
+            if(grid[baseRow][col].getNumberOfPossibles() == 1 && grid[baseRow][col].possibleValues[0] == value){
+                return false;
+            }
             grid[baseRow][col].removePossibleValue(value);
-            checkForUniqueInUnitsGuess(grid, baseRow,col);
+
+            if(!checkForUniqueInUnitsGuess(grid, baseRow,col)){
+                return false;
+            }
             
             if(grid[baseRow][col].getNumberOfPossibles() == 1){
                 if(isSafe(grid, baseRow , col, grid[baseRow][col].possibleValues[0])){  
                     grid[baseRow][col].commitValue(grid[baseRow][col].possibleValues[0]);
                     grid[baseRow][col].clearPossibles();
-                    removeInPeersGuess(grid, baseRow, col,grid[baseRow][col].getCommitValue());
+                    if(!removeInPeersGuess(grid, baseRow, col,grid[baseRow][col].getCommitValue())){
+                        return false;
+                    }
                 }
             }
         }
     }
+    return true;
     
 }
 
-
-
-std::pair<int, int> getLeastPossiblesLocation(Square (&grid)[9][9]){
+std::pair<int, int> getLeastPossiblesLocation(Square **grid){
     int numberOfPossibles = 10;
     std::pair<int, int> beginPair;
 	for (int row = 0; row < 9; row++)
@@ -444,7 +465,7 @@ std::pair<int, int> getLeastPossiblesLocation(Square (&grid)[9][9]){
     }
 }
 
-bool guessSudoku(Square (&grid)[9][9]){
+bool guessSudoku(Square **grid){
 	// If the Soduko grid has been filled, we are done
 	if (GRID_FULL == getLeastPossiblesLocation(grid)){
 		return true; 
@@ -454,25 +475,34 @@ bool guessSudoku(Square (&grid)[9][9]){
 	std::pair<int, int> row_and_col = getLeastPossiblesLocation(grid);
 	int row = row_and_col.first;
 	int col = row_and_col.second;
-    Square backupGrid[9][9];
     
     //Do a backup of grid
+    Square backupGrid[9][9];
+    /*
+    Square **backupGrid = new Square*[9];
+
+    for(int i = 0; i < 9; i++){
+        backupGrid[i] = new Square[9];
+
+    }*/
+    
     for(int i = 0; i <9; i++){
         for(int j = 0; j < 9; j++){
             backupGrid[i][j] = grid[i][j];
         }
     }
     
-
     //Start guessing
     std::vector<int> tempVector = grid[row][col].possibleValues;
     for(int value : tempVector){
         if (isSafe(grid, row, col, value)){
             grid[row][col].commitValue(value);
             grid[row][col].clearPossibles();
-            removeInPeersGuess(grid, row, col, value);
+            if(!removeInPeersGuess(grid, row, col, value)){
+                goto tryNewValue;
+            }
 
-            std::cout << "------------------------------------------------------------------------------------------------------------" << std::endl;
+            /*std::cout << "------------------------------------------------------------------------------------------------------------" << std::endl;
             std::cout << "After guessing "<< std::endl;
             for(int i=0; i<9; i++){
                 for(int j=0; j < 9; j++){
@@ -480,11 +510,13 @@ bool guessSudoku(Square (&grid)[9][9]){
                     std::cout << " . ";
                 }
                 std::cout << std::endl;
-            }
+            }*/
             
             if(guessSudoku(grid)){
                 return true;
             }
+
+            tryNewValue:
             //Retrieve from backup
             for(int i = 0; i <9; i++){
                 for(int j = 0; j < 9; j++){
@@ -493,7 +525,13 @@ bool guessSudoku(Square (&grid)[9][9]){
                 }    
             }        
         }
-    }    
+    }
+    /*
+    for(int i = 0; i < 9; i++){
+        delete [] backupGrid[i];
+    }
+    delete [] backupGrid;*/
+   
     return false;
 }
 
@@ -502,15 +540,12 @@ int main(int argc, char ** argv){
     int SudokuMatrix[9][9];
     InputSudoku(SudokuMatrix);
     auto start = std::chrono::high_resolution_clock::now();
-    Square grid[9][9];
+    //Square grid[9][9];
     
-    /*Square **grid = new Square*[9];
-
+    Square **grid = new Square*[9];
     for(int i = 0; i < 9; i++){
         grid[i] = new Square[9];
-
-    }*/
-
+    }
 
     //Applying rule (1) & (2)
     for (int i=0; i<9; i++){
@@ -522,7 +557,15 @@ int main(int argc, char ** argv){
             }
         }
     }
-    
+    std::cout << "------------------------------------------------------------------------------------------------------------" << std::endl;
+    std::cout << "InputSudoku"<< std::endl;
+    for(int i=0; i<9; i++){
+        for(int j=0; j < 9; j++){
+            std::cout << SudokuMatrix[i][j] << " . ";
+        }
+        std::cout << std::endl;
+    }
+
     int countOfUnCommitted = 0;
 
     std::cout << "------------------------------------------------------------------------------------------------------------" << std::endl;
@@ -556,6 +599,11 @@ int main(int argc, char ** argv){
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
 
     std::cout << "Time of execution: " << duration.count() << " microseconds" << std::endl;
+    
+    for(int i = 0; i < 9; i++){
+        delete [] grid[i];
+    }
+    delete [] grid;
 
     return 0;
 }

@@ -4,6 +4,7 @@
 
 int main(){
     std::multiset<int> s1;
+    std::srand(time(nullptr));
 
     for(int i = 0; i < 1024; i++){
         int randNumber = rand();

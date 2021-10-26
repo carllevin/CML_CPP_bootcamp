@@ -165,8 +165,9 @@ int **SolveSudoku(int **SudokuMatrix){
                 SudokuMatrix[i][j] = grid[i][j];
             }
         }
-        return SudokuMatrix; 
+        
     }
+	return SudokuMatrix; 
 }
 
 void printSudoku(int **SudokuMatrix){    

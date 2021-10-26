@@ -56,14 +56,14 @@ class Triangle: public Shape{
         }
 };
 
-template <typename T>
-void compareShapes(T &_a, T &_b){
+template <typename T1, typename T2>
+void compareShapes(T1 &_a, T2 &_b){
     if(_a > _b){
-        std::cout << "First input is bigger than second input" << std::endl;
+        std::cout << "First input is bigger than the second input" << std::endl;
     } else if(_a == _b){
-        std::cout << "First input is equal the size of second input " << std::endl;
+        std::cout << "First input is equal the size of the second input " << std::endl;
     } else {
-        std::cout << "First input is smaller than second input" << std::endl;
+        std::cout << "First input is smaller than the second input" << std::endl;
     }
 
 }
@@ -72,8 +72,13 @@ int main() {
     Circle c(2);
     Rectangle r1(3,4);
     Rectangle r2(3,4);
-    compareShapes<Shape>(c, r1);
-    compareShapes<Shape>(r1, c);
-    compareShapes<Shape>(r1,r2);
-    //compareShapes<>(3,1);
+    int a = 3;
+    int b = 2;
+    
+    compareShapes(c, r1);
+    compareShapes(r1, c);
+    compareShapes(r1,r2);
+    
+    compareShapes(a,b); //Why does this work and not compareShapes(3,2)? Because we have &-reference in input to function
+
 }

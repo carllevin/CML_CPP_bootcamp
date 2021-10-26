@@ -24,5 +24,5 @@ int main(){
     for(int i = 0; i < wordQuantities.size(); i++){
         std::cout << wordQuantities[i].first << " occurs " << wordQuantities[i].second << " in textfile Lookup.txt"  << std::endl;
     }
-
+    return 0;
 }
