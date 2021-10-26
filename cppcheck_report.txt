@@ -1,10 +1,10 @@
-MiniProject/NorvigSudoku.cpp:24:14: style:inconclusive: Technically the member function 'Square::printPossibleValues' can be const. [functionConst]
+MiniProject/NorvigSudoku.cpp:23:14: style:inconclusive: Technically the member function 'Square::printPossibleValues' can be const. [functionConst]
         void printPossibleValues(){
              ^
-MiniProject/NorvigSudoku.cpp:45:13: style:inconclusive: Technically the member function 'Square::getCommitValue' can be const. [functionConst]
+MiniProject/NorvigSudoku.cpp:44:13: style:inconclusive: Technically the member function 'Square::getCommitValue' can be const. [functionConst]
         int getCommitValue(){
             ^
-MiniProject/NorvigSudoku.cpp:48:13: style:inconclusive: Technically the member function 'Square::getNumberOfPossibles' can be const. [functionConst]
+MiniProject/NorvigSudoku.cpp:47:13: style:inconclusive: Technically the member function 'Square::getNumberOfPossibles' can be const. [functionConst]
         int getNumberOfPossibles(){
             ^
 WeekOne/DayFive/ShapeComp.cpp:15:9: style: Class 'Circle' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
@@ -115,13 +115,13 @@ WeekThree/Thursday/Assignment2.cpp:15:14: note: Same expression used in consecut
 WeekThree/WordsQuantity.cpp:11:9: style: The scope of the variable 'quantity' can be reduced. [variableScope]
     int quantity;
         ^
-MiniProject/NorvigSudoku.cpp:13:1: error: The one definition rule is violated, different classes/structs have the same name 'Square' [ctuOneDefinitionRuleViolation]
+MiniProject/NorvigSudoku.cpp:12:1: error: The one definition rule is violated, different classes/structs have the same name 'Square' [ctuOneDefinitionRuleViolation]
 class Square{
 ^
 WeekOne/DayFive/ShapeComp.cpp:31:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
 class Square: public Shape{
 ^
-MiniProject/NorvigSudoku.cpp:13:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
+MiniProject/NorvigSudoku.cpp:12:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
 class Square{
 ^
 WeekOne/DayFive/ShapeComp.cpp:10:1: error: The one definition rule is violated, different classes/structs have the same name 'Circle' [ctuOneDefinitionRuleViolation]
@@ -133,13 +133,13 @@ class Circle: public Shape{
 WeekOne/DayFive/ShapeComp.cpp:10:1: note: The one definition rule is violated, different classes/structs have the same name 'Circle'
 class Circle: public Shape{
 ^
-MiniProject/NorvigSudoku.cpp:13:1: error: The one definition rule is violated, different classes/structs have the same name 'Square' [ctuOneDefinitionRuleViolation]
+MiniProject/NorvigSudoku.cpp:12:1: error: The one definition rule is violated, different classes/structs have the same name 'Square' [ctuOneDefinitionRuleViolation]
 class Square{
 ^
 WeekThree/ShapeCompareTemplate.cpp:43:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
 class Square: public Shape{
 ^
-MiniProject/NorvigSudoku.cpp:13:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
+MiniProject/NorvigSudoku.cpp:12:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
 class Square{
 ^
 nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingIncludeSystem]
