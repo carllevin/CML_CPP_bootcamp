@@ -9,7 +9,6 @@
 #define GRID_FULL std::make_pair(10, 10)
 int numberOfGuesses;
 
-
 class Square{
     public:
         std::vector<int> possibleValues;
@@ -48,39 +47,7 @@ class Square{
         int getNumberOfPossibles(){
             return possibleValues.size();
         };
-        void clearPossibles(){
-            this->possibleValues.clear();
-        } 
 };
-
-void InputSudoku(int (&SudokuMatrix)[9][9]){
-    std::string filename;
-    std::cout<< "Enter the name of the Sudoku-file: " << std::endl;
-    std::cin >> filename; 
-
-    std::string STRING;
-	std::ifstream infile;
-    int row = 0;
-	infile.open (filename);
-        while(getline(infile,STRING)) // To get you all the lines.
-        {   
-            int col = 0;
-            std::stringstream str_strm; 
-            str_strm << STRING;
-
-            while(col <= 8){
-                std::string temp_str;
-                int temp_int;
-                str_strm >> temp_str;
-                temp_int = stoi(temp_str);
-                SudokuMatrix[row][col] = temp_int;
-                col++;
-            }
-	        row++;   
-        }
-    std::cout<< std::endl;
-    infile.close();
-}
 
 bool used_in_row(Square **grid, const int row, const int value){
 	for (int col = 0; col < 9; col++)
@@ -292,7 +259,7 @@ bool removeInPeers(Square **grid, const int baseRow, const int  baseCol, const i
     return true;
 }
 
-std::pair<int, int> getLeastPossiblesLocation(Square **grid){
+std::pair<int, int> getLocationOfLeastPossibles(Square **grid){
     int numberOfPossibles = 10;
     std::pair<int, int> beginPair;
 	for (int row = 0; row < 9; row++)
@@ -311,18 +278,17 @@ std::pair<int, int> getLeastPossiblesLocation(Square **grid){
 
 bool guessSudoku(Square **grid){
 	// If the Soduko grid has been filled, we are done
-	if (GRID_FULL == getLeastPossiblesLocation(grid)){
+	if (GRID_FULL == getLocationOfLeastPossibles(grid)){
 		return true; 
 	}
 
 	// Get the square with least possible solutions
-	std::pair<int, int> row_and_col = getLeastPossiblesLocation(grid);
+	std::pair<int, int> row_and_col = getLocationOfLeastPossibles(grid);
 	int row = row_and_col.first;
 	int col = row_and_col.second;
     
-    //Do a backup of grid
+    //Do a backup of the grid
     Square backupGrid[9][9];
-    
     for(int i = 0; i <9; i++){
         for(int j = 0; j < 9; j++){
             backupGrid[i][j] = grid[i][j];
@@ -335,7 +301,6 @@ bool guessSudoku(Square **grid){
         if (isSafe(grid, row, col, value)){
             numberOfGuesses ++;
             grid[row][col].commitValue(value);
-            grid[row][col].clearPossibles();
             if(removeInPeers(grid, row, col, value)){
                 if(guessSudoku(grid)){
                     return true;
@@ -356,9 +321,6 @@ bool guessSudoku(Square **grid){
 
 int main(int argc, char ** argv){
     auto start = std::chrono::high_resolution_clock::now();
-
-    //std::string s = "...8.....789.1...6.....61....7....5.5.87.93.4.4....2....32.....8...7.439.....1...";
-    //std::string s = "..............3.85..1.2.......5.7.....4...1...9.......5......73..2.1........4...9";
     
     std::ifstream infile("SudokuListFromSlack.txt");
     std::string s;
@@ -376,8 +338,7 @@ int main(int argc, char ** argv){
         int col = 0;
         for(char c : s){
             if(c != '.'){
-                grid[row][col].commitValue(c - '0');
-                grid[row][col].clearPossibles();    
+                grid[row][col].commitValue(c - '0');  
                 if(removeInPeers(grid,row,col,grid[row][col].getCommitValue())){
 
                 }  
@@ -390,7 +351,6 @@ int main(int argc, char ** argv){
         }
 
         int countOfUnCommitted = 0;
-
         std::cout << "------------------------------------------------------------------------------------------------------------" << std::endl;
         std::cout << "After applying rule (1) & (2) "<< std::endl;
         for(int i=0; i<9; i++){
@@ -419,8 +379,7 @@ int main(int argc, char ** argv){
             std::cout << "It took " << numberOfGuesses << " guesses to solve the sudoku."<< std::endl;    
             } else {
                 std::cout << "Could not find a solution " << std::endl;
-            }
-            
+            }   
         }
         
         for(int i = 0; i < 9; i++){
