@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/clevin1/CodeWriting/git/CML_CPP_bootcamp/Day18/SudokuBuild/NorvigSudoku.cpp
+NorvigSudoku.hpp
+/home/clevin1/CodeWriting/git/CML_CPP_bootcamp/Day18/SudokuBuild/NorvigSudoku.hpp
+
+/home/clevin1/CodeWriting/git/CML_CPP_bootcamp/Day18/SudokuBuild/NorvigSudoku.hpp
+iostream
+-
+fstream
+-
+sstream
+-
+vector
+-
+algorithm
+-
+iomanip
+-
+chrono
+-
+

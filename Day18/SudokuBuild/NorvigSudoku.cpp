@@ -1,53 +1,5 @@
-#include <iostream>
-#include <fstream>
-#include<sstream>
-#include<vector>
-#include <algorithm>
-#include <iomanip>
-#include <chrono>
-
-#define GRID_FULL std::make_pair(10, 10)
+#include "NorvigSudoku.hpp"
 int numberOfGuesses;
-
-class Square{
-    public:
-        std::vector<int> possibleValues;
-        int commitVal;
-        Square(){
-            possibleValues.assign({1,2,3,4,5,6,7,8,9});
-            this->commitVal = 0;
-        }
-        void removePossibleValue(int value){
-            possibleValues.erase(std::remove(possibleValues.begin(), possibleValues.end(), value), possibleValues.end());
-        };
-        void printPossibleValues(){
-            if (possibleValues.size() > 0){
-                for(int i = 0; i < possibleValues.size(); i++){
-                    std::cout << possibleValues[i];
-                }
-            } else {
-                std::cout << this->commitVal;
-            }
-            int count = 0;
-            while(count < 9 - possibleValues.size()){
-                std::cout << " ";
-                count++;
-            }
-            if(possibleValues.size()>0){
-                std::cout << " ";
-            }
-        };
-        void commitValue(int value){
-            this->commitVal = value;
-            this->possibleValues.clear();
-        }
-        int getCommitValue(){
-            return commitVal;
-        }
-        int getNumberOfPossibles(){
-            return possibleValues.size();
-        };
-};
 
 bool used_in_row(Square **grid, const int row, const int value){
 	for (int col = 0; col < 9; col++)
@@ -83,7 +35,6 @@ bool isSafe(Square **grid, const int row, const int col, const int num){
 		!used_in_box(grid, row - row % 3, col - col % 3, num);
 }
 
-bool removeInPeers(Square **grid, const int baseRow, const int  baseCol, const int value);
 
 bool checkForUniqueInUnits(Square **grid, const int baseRow, const int baseCol){
     if (grid[baseRow][baseCol].getNumberOfPossibles() > 1){
@@ -319,78 +270,20 @@ bool guessSudoku(Square **grid){
     return false;
 }
 
-int main(int argc, char ** argv){
-    
-    
-    std::ifstream infile("SudokuListFromSlack.txt");
-    std::string s;
-    auto start = std::chrono::high_resolution_clock::now();
-    while(std::getline(infile, s)){
-        numberOfGuesses = 0;
-        std::cout << "\nSudoku to Solve: \n" << s << std::endl;
-
-        Square **grid = new Square*[9];
-        for(int i = 0; i < 9; i++){
-            grid[i] = new Square[9];
+void Square::printPossibleValues(){
+    if (possibleValues.size() > 0){
+        for(int i = 0; i < possibleValues.size(); i++){
+            std::cout << possibleValues[i];
         }
-        
-        //Parse through puzzle and apply rule (1) & (2)
-        int row = 0;
-        int col = 0;
-        for(char c : s){
-            if(c != '.'){
-                grid[row][col].commitValue(c - '0');  
-                if(removeInPeers(grid,row,col,grid[row][col].getCommitValue())){
-
-                }  
-            }
-            col ++;
-            if(col == 9){
-                row++;
-                col = 0;
-            }
-        }
-
-        int countOfUnCommitted = 0;
-        std::cout << "------------------------------------------------------------------------------------------------------------" << std::endl;
-        std::cout << "After applying rule (1) & (2) "<< std::endl;
-        for(int i=0; i<9; i++){
-            for(int j=0; j < 9; j++){
-                grid[i][j].printPossibleValues();
-                std::cout << " . ";
-                if(grid[i][j].getNumberOfPossibles() > 0){
-                    countOfUnCommitted ++;
-                }
-            }
-            std::cout << std::endl;
-        }
-
-        //Guess sudoku
-        if(countOfUnCommitted > 0){
-            if(guessSudoku(grid)){
-                std::cout << "------------------------------------------------------------------------------------------------------------" << std::endl;
-                std::cout << "After guessing "<< std::endl;
-                for(int i=0; i<9; i++){
-                    for(int j=0; j < 9; j++){
-                        grid[i][j].printPossibleValues();
-                        std::cout << " . ";
-                    }
-                    std::cout << std::endl;
-                }
-            std::cout << "It took " << numberOfGuesses << " guesses to solve the sudoku."<< std::endl;    
-            } else {
-                std::cout << "Could not find a solution " << std::endl;
-            }   
-        }
-        
-        for(int i = 0; i < 9; i++){
-            delete [] grid[i];
-        }
-        delete [] grid;
+    } else {
+        std::cout << this->commitVal;
     }
-    auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    std::cout << "Time of execution: " << duration.count() << " microseconds" << std::endl;
-
-    return 0;
+    int count = 0;
+    while(count < 9 - possibleValues.size()){
+        std::cout << " ";
+        count++;
+    }
+    if(possibleValues.size()>0){
+        std::cout << " ";
+    }
 }
