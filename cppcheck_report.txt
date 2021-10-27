@@ -1,3 +1,81 @@
+Day18/ShapeBuild/Shape.hpp:10:14: style:inconclusive: Technically the member function 'Shape::operator>' can be const. [functionConst]
+        bool operator >(Shape s);
+             ^
+Day18/ShapeBuild/ShapeComp.cpp:3:13: note: Technically the member function 'Shape::operator>' can be const.
+bool Shape::operator >(Shape s){
+            ^
+Day18/ShapeBuild/Shape.hpp:10:14: note: Technically the member function 'Shape::operator>' can be const.
+        bool operator >(Shape s);
+             ^
+Day18/ShapeBuild/Shape.hpp:11:14: style:inconclusive: Technically the member function 'Shape::operator<' can be const. [functionConst]
+        bool operator <(Shape s);
+             ^
+Day18/ShapeBuild/ShapeComp.cpp:7:13: note: Technically the member function 'Shape::operator<' can be const.
+bool Shape::operator <(Shape s){
+            ^
+Day18/ShapeBuild/Shape.hpp:11:14: note: Technically the member function 'Shape::operator<' can be const.
+        bool operator <(Shape s);
+             ^
+Day18/ShapeBuild/Shape.hpp:12:14: style:inconclusive: Technically the member function 'Shape::operator==' can be const. [functionConst]
+        bool operator ==(Shape s);
+             ^
+Day18/ShapeBuild/ShapeComp.cpp:11:13: note: Technically the member function 'Shape::operator==' can be const.
+bool Shape::operator ==(Shape s){
+            ^
+Day18/ShapeBuild/Shape.hpp:12:14: note: Technically the member function 'Shape::operator==' can be const.
+        bool operator ==(Shape s);
+             ^
+Day18/ShapeBuild/Shape.hpp:20:9: style: Class 'Circle' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+        Circle(int radius){
+        ^
+Day18/ShapeBuild/Shape.hpp:38:9: style: Class 'Square' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+        Square(int side){
+        ^
+Day18/ShapeBuild/Shape.hpp:46:9: style: Class 'Triangle' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+        Triangle(int side) {
+        ^
+Day18/SudokuBuild/NorvigSudoku.hpp:26:14: style:inconclusive: Technically the member function 'Square::printPossibleValues' can be const. [functionConst]
+        void printPossibleValues();
+             ^
+Day18/SudokuBuild/NorvigSudoku.cpp:273:14: note: Technically the member function 'Square::printPossibleValues' can be const.
+void Square::printPossibleValues(){
+             ^
+Day18/SudokuBuild/NorvigSudoku.hpp:26:14: note: Technically the member function 'Square::printPossibleValues' can be const.
+        void printPossibleValues();
+             ^
+Day18/SudokuBuild/NorvigSudoku.hpp:32:13: style:inconclusive: Technically the member function 'Square::getCommitValue' can be const. [functionConst]
+        int getCommitValue(){
+            ^
+Day18/SudokuBuild/NorvigSudoku.hpp:35:13: style:inconclusive: Technically the member function 'Square::getNumberOfPossibles' can be const. [functionConst]
+        int getNumberOfPossibles(){
+            ^
+Day18/SudokuBuild/build/CMakeFiles/3.16.3/CompilerIdC/CMakeCCompilerId.c:0:0: information: Too many #ifdef configurations - cppcheck only checks 12 of 112 configurations. Use --force to check all configurations. [toomanyconfigs]
+
+^
+Day18/SudokuBuild/build/CMakeFiles/3.16.3/CompilerIdC/CMakeCCompilerId.c:570:0: information: Skipping configuration 'SDCC;__SDCC_VERSION_MAJOR' since the value of '__SDCC_VERSION_MAJOR' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+  COMPILER_VERSION_MAJOR,
+^
+Day18/SudokuBuild/build/CMakeFiles/3.16.3/CompilerIdC/CMakeCCompilerId.c:570:0: information: Skipping configuration 'SDCC;__SDCC_VERSION_MAJOR;__SDCC_VERSION_MAJOR' since the value of '__SDCC_VERSION_MAJOR' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+  COMPILER_VERSION_MAJOR,
+^
+Day18/SudokuBuild/build/CMakeFiles/3.16.3/CompilerIdCXX/CMakeCXXCompilerId.cpp:0:0: information: Too many #ifdef configurations - cppcheck only checks 12 of 110 configurations. Use --force to check all configurations. [toomanyconfigs]
+
+^
+Day18/SudokuBuild/build/CMakeFiles/3.16.3/CompilerIdCXX/CMakeCXXCompilerId.cpp:555:0: information: Skipping configuration '_MSC_BUILD;_MSC_VER' since the value of '_MSC_VER' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+  COMPILER_VERSION_MAJOR,
+^
+Day18/SudokuBuild/build/CMakeFiles/3.16.3/CompilerIdCXX/CMakeCXXCompilerId.cpp:557:0: information: Skipping configuration '_MSC_BUILD;_MSC_VER' since the value of '_MSC_VER' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+  '.', COMPILER_VERSION_MINOR,
+^
+Day18/SudokuBuild/build/CMakeFiles/3.16.3/CompilerIdCXX/CMakeCXXCompilerId.cpp:559:0: information: Skipping configuration '_MSC_FULL_VER;_MSC_VER' since the value of '_MSC_FULL_VER' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+   '.', COMPILER_VERSION_PATCH,
+^
+Day18/SudokuBuild/build/CMakeFiles/3.16.3/CompilerIdCXX/CMakeCXXCompilerId.cpp:555:0: information: Skipping configuration '_MSC_FULL_VER;_MSC_VER' since the value of '_MSC_VER' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+  COMPILER_VERSION_MAJOR,
+^
+Day18/SudokuBuild/build/CMakeFiles/3.16.3/CompilerIdCXX/CMakeCXXCompilerId.cpp:557:0: information: Skipping configuration '_MSC_FULL_VER;_MSC_VER' since the value of '_MSC_VER' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+  '.', COMPILER_VERSION_MINOR,
+^
 MiniProject/NorvigSudoku.cpp:23:14: style:inconclusive: Technically the member function 'Square::printPossibleValues' can be const. [functionConst]
         void printPossibleValues(){
              ^
@@ -115,32 +193,32 @@ WeekThree/Thursday/Assignment2.cpp:15:14: note: Same expression used in consecut
 WeekThree/WordsQuantity.cpp:11:9: style: The scope of the variable 'quantity' can be reduced. [variableScope]
     int quantity;
         ^
-MiniProject/NorvigSudoku.cpp:12:1: error: The one definition rule is violated, different classes/structs have the same name 'Square' [ctuOneDefinitionRuleViolation]
+Day18/ShapeBuild/Shape.hpp:36:1: error: The one definition rule is violated, different classes/structs have the same name 'Square' [ctuOneDefinitionRuleViolation]
+class Square: public Shape{
+^
+Day18/SudokuBuild/NorvigSudoku.hpp:15:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
 class Square{
 ^
-WeekOne/DayFive/ShapeComp.cpp:31:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
+Day18/ShapeBuild/Shape.hpp:36:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
+class Square: public Shape{
+^
+Day18/ShapeBuild/Shape.hpp:36:1: error: The one definition rule is violated, different classes/structs have the same name 'Square' [ctuOneDefinitionRuleViolation]
 class Square: public Shape{
 ^
 MiniProject/NorvigSudoku.cpp:12:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
 class Square{
 ^
-WeekOne/DayFive/ShapeComp.cpp:10:1: error: The one definition rule is violated, different classes/structs have the same name 'Circle' [ctuOneDefinitionRuleViolation]
-class Circle: public Shape{
+Day18/ShapeBuild/Shape.hpp:36:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
+class Square: public Shape{
 ^
-WeekThree/ShapeCompareTemplate.cpp:22:1: note: The one definition rule is violated, different classes/structs have the same name 'Circle'
+Day18/ShapeBuild/Shape.hpp:15:1: error: The one definition rule is violated, different classes/structs have the same name 'Circle' [ctuOneDefinitionRuleViolation]
 class Circle: public Shape{
 ^
 WeekOne/DayFive/ShapeComp.cpp:10:1: note: The one definition rule is violated, different classes/structs have the same name 'Circle'
 class Circle: public Shape{
 ^
-MiniProject/NorvigSudoku.cpp:12:1: error: The one definition rule is violated, different classes/structs have the same name 'Square' [ctuOneDefinitionRuleViolation]
-class Square{
-^
-WeekThree/ShapeCompareTemplate.cpp:43:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
-class Square: public Shape{
-^
-MiniProject/NorvigSudoku.cpp:12:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
-class Square{
+Day18/ShapeBuild/Shape.hpp:15:1: note: The one definition rule is violated, different classes/structs have the same name 'Circle'
+class Circle: public Shape{
 ^
 nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingIncludeSystem]
 
