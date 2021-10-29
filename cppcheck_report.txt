@@ -85,31 +85,40 @@ MiniProject/FinalSudoku/include/NorvigSudoku.hpp:32:13: style:inconclusive: Tech
 MiniProject/FinalSudoku/include/NorvigSudoku.hpp:23:14: style:inconclusive: Technically the member function 'Square::printPossibleValues' can be const. [functionConst]
         void printPossibleValues();
              ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:396:14: note: Technically the member function 'Square::printPossibleValues' can be const.
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:399:14: note: Technically the member function 'Square::printPossibleValues' can be const.
 void Square::printPossibleValues(){
              ^
 MiniProject/FinalSudoku/include/NorvigSudoku.hpp:23:14: note: Technically the member function 'Square::printPossibleValues' can be const.
         void printPossibleValues();
              ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:266:31: style: Condition '!leastFound' is always true [knownConditionTrueFalse]
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:269:31: style: Condition '!leastFound' is always true [knownConditionTrueFalse]
  for (int row = 0; row < 9 && !leastFound; row++)
                               ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:265:23: note: Assignment 'leastFound=false', assigned value is 0
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:268:23: note: Assignment 'leastFound=false', assigned value is 0
     bool leastFound = false;
                       ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:266:31: note: Condition '!leastFound' is always true
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:269:31: note: Condition '!leastFound' is always true
  for (int row = 0; row < 9 && !leastFound; row++)
                               ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:267:32: style: Condition '!leastFound' is always true [knownConditionTrueFalse]
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:270:32: style: Condition '!leastFound' is always true [knownConditionTrueFalse]
   for (int col = 0; col < 9 && !leastFound; col++)
                                ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:265:23: note: Assignment 'leastFound=false', assigned value is 0
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:268:23: note: Assignment 'leastFound=false', assigned value is 0
     bool leastFound = false;
                       ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:267:32: note: Condition '!leastFound' is always true
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:270:32: note: Condition '!leastFound' is always true
   for (int col = 0; col < 9 && !leastFound; col++)
                                ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:378:30: performance: Function parameter 's' should be passed by const reference. [passedByValue]
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:157:19: style: The scope of the variable 'square' can be reduced. [variableScope]
+            auto &square = grid[box_start_row + row ][box_start_col+col];
+                  ^
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:184:15: style: The scope of the variable 'square' can be reduced. [variableScope]
+        auto &square = grid[row][baseCol];
+              ^
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:210:15: style: The scope of the variable 'square' can be reduced. [variableScope]
+        auto &square = grid[baseRow][col];
+              ^
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:381:30: performance: Function parameter 's' should be passed by const reference. [passedByValue]
 void solveSudoku(std::string s){
                              ^
 MiniProject/FinalSudoku/src/NorvigSudoku.cpp:50:39: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
@@ -139,7 +148,7 @@ MiniProject/FinalSudoku/src/NorvigSudoku.cpp:107:31: style: Variable 'check' is 
 MiniProject/FinalSudoku/src/NorvigSudoku.cpp:113:31: style: Variable 'check' is assigned a value that is never used. [unreadVariable]
                         check = false;
                               ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:273:28: style: Variable 'leastFound' is assigned a value that is never used. [unreadVariable]
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:276:28: style: Variable 'leastFound' is assigned a value that is never used. [unreadVariable]
                 leastFound = true;
                            ^
 MiniProject/Old/NorvigSudoku.cpp:23:14: style:inconclusive: Technically the member function 'Square::printPossibleValues' can be const. [functionConst]
