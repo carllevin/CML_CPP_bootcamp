@@ -154,16 +154,17 @@ bool removeInBox(Square **grid, const int baseRow, const int  baseCol, const int
 
     for (int row = 0; row < 3; row++){
 		for (int col = 0; col < 3; col++){
+            auto &square = grid[box_start_row + row ][box_start_col+col];
             if(box_start_row + row != baseRow || box_start_col + col != baseCol){
-                if(grid[box_start_row + row ][box_start_col+col].getNumberOfPossibles() == 1 && grid[box_start_row + row ][box_start_col+col].possibleValues[0] == value ){
+                if(square.getNumberOfPossibles() == 1 && square.possibleValues[0] == value ){
                     return false;
                 }                
                 grid[box_start_row + row ][box_start_col+col].removePossibleValue(value);
 
-                if(grid[box_start_row + row][box_start_col+col].getNumberOfPossibles() == 1){
-                    if(isSafe(grid, box_start_row + row, box_start_col+col, grid[box_start_row + row][box_start_col+col].possibleValues[0])){    
-                        grid[box_start_row + row][box_start_col+col].commitValue(grid[box_start_row + row][box_start_col+col].possibleValues[0]);
-                        if(!removeInPeers(grid,box_start_row + row,box_start_col+col, grid[box_start_row + row][box_start_col+col].getCommitValue())){
+                if(square.getNumberOfPossibles() == 1){
+                    if(isSafe(grid, box_start_row + row, box_start_col+col, square.possibleValues[0])){    
+                        square.commitValue(square.possibleValues[0]);
+                        if(!removeInPeers(grid,box_start_row + row,box_start_col+col, square.getCommitValue())){
                             return false;
                         }
                     } 
@@ -180,16 +181,17 @@ bool removeInBox(Square **grid, const int baseRow, const int  baseCol, const int
 bool removeInCol(Square **grid, const int baseRow, const int  baseCol, const int value){
     //Remove value from peers in col-unit
     for(int row = 0; row < 9; row++){
+        auto &square = grid[row][baseCol];
         if(row != baseRow){
-            if(grid[row][baseCol].getNumberOfPossibles() == 1 && grid[row][baseCol].possibleValues[0] == value){
+            if(square.getNumberOfPossibles() == 1 && square.possibleValues[0] == value){
                 return false;
             }
-            grid[row][baseCol].removePossibleValue(value); 
+            square.removePossibleValue(value); 
 
-            if(grid[row][baseCol].getNumberOfPossibles() == 1){
-                if(isSafe(grid, row , baseCol, grid[row][baseCol].possibleValues[0])){ 
-                    grid[row][baseCol].commitValue(grid[row][baseCol].possibleValues[0]);
-                    if(!removeInPeers(grid, row, baseCol,grid[row][baseCol].getCommitValue())){
+            if(square.getNumberOfPossibles() == 1){
+                if(isSafe(grid, row , baseCol, square.possibleValues[0])){ 
+                    square.commitValue(square.possibleValues[0]);
+                    if(!removeInPeers(grid, row, baseCol,square.getCommitValue())){
                         return false;
                     }
                 }
@@ -205,16 +207,17 @@ bool removeInCol(Square **grid, const int baseRow, const int  baseCol, const int
 bool removeInRow(Square **grid, const int baseRow, const int  baseCol, const int value){
     //Remove value from peers in row-unit
     for(int col = 0; col < 9; col++){
+        auto &square = grid[baseRow][col];
         if(col != baseCol){
-            if(grid[baseRow][col].getNumberOfPossibles() == 1 && grid[baseRow][col].possibleValues[0] == value){
+            if(square.getNumberOfPossibles() == 1 && square.possibleValues[0] == value){
                 return false;
             }
-            grid[baseRow][col].removePossibleValue(value);
+            square.removePossibleValue(value);
 
-            if(grid[baseRow][col].getNumberOfPossibles() == 1){
-                if(isSafe(grid, baseRow , col, grid[baseRow][col].possibleValues[0])){  
-                    grid[baseRow][col].commitValue(grid[baseRow][col].possibleValues[0]);
-                    if(!removeInPeers(grid, baseRow, col,grid[baseRow][col].getCommitValue())){
+            if(square.getNumberOfPossibles() == 1){
+                if(isSafe(grid, baseRow , col, square.possibleValues[0])){  
+                    square.commitValue(square.possibleValues[0]);
+                    if(!removeInPeers(grid, baseRow, col, square.getCommitValue())){
                         return false;
                     }
                 }
