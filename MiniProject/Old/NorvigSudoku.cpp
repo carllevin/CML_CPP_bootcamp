@@ -274,6 +274,7 @@ std::pair<int, int> getLocationOfLeastPossibles(Square **grid){
     } else {
         return beginPair;
     }
+    //if you find one with 2 get out of the loop
 }
 
 bool guessSudoku(Square **grid){
@@ -290,7 +291,7 @@ bool guessSudoku(Square **grid){
     //Do a backup of the grid
     Square backupGrid[9][9];
     for(int i = 0; i <9; i++){
-        for(int j = 0; j < 9; j++){
+        for(int j = 0; j < 9; j++){ 
             backupGrid[i][j] = grid[i][j];
         }
     }
@@ -298,7 +299,7 @@ bool guessSudoku(Square **grid){
     //Start guessing
     std::vector<int> tempVector = grid[row][col].possibleValues;
     for(int value : tempVector){
-        if (isSafe(grid, row, col, value)){
+        if (isSafe(grid, row, col, value)){ //no need?
             numberOfGuesses ++;
             grid[row][col].commitValue(value);
             if(removeInPeers(grid, row, col, value)){
@@ -322,7 +323,7 @@ bool guessSudoku(Square **grid){
 int main(int argc, char ** argv){
     
     
-    std::ifstream infile("SudokuListFromSlack.txt");
+    std::ifstream infile("SudokuList1.txt");
     std::string s;
     auto start = std::chrono::high_resolution_clock::now();
     while(std::getline(infile, s)){
