@@ -36,59 +36,49 @@ bool isSafe(Square **grid, const int row, const int col, const int num){
 }
 
 bool checkforUniqueInCol(Square **grid, const int baseRow, const int baseCol, int value){
-    bool check = true;
     //Check in Col
     for(int row = 0; row < 9; row++){
         if(row != baseRow){
             if(grid[row][baseCol].possibleValues.size() == 0){
                 if(value == grid[row][baseCol].getCommitValue()){
-                    check = false;
                     return true;
                 }
             }
             for(int peerValue : grid[row][baseCol].possibleValues){
                 if(value == peerValue){
-                    check = false;
                     return true; 
                 }
             }
         }
     }
-    if (check){
-        if(isSafe(grid, baseRow , baseCol, value)){ 
-            grid[baseRow][baseCol].commitValue(value);
-            if(!removeInPeers(grid, baseRow, baseCol, value)){
-                return false;
-            }
+    if(isSafe(grid, baseRow , baseCol, value)){ 
+        grid[baseRow][baseCol].commitValue(value);
+        if(!removeInPeers(grid, baseRow, baseCol, value)){
+            return false;
         }
     }
     return true;
 }
 
 bool checkforUniqueInRow(Square **grid, const int baseRow, const int baseCol, int value){
-    bool check = true;
     for(int col = 0; col < 9; col++){
         if(col != baseCol){
             if(grid[baseRow][col].possibleValues.size() == 0){
                 if(value == grid[baseRow][col].getCommitValue()){
-                    check = false;
                     return true;
                 }
             }
             for(int peerValue : grid[baseRow][col].possibleValues){
                 if(value == peerValue){
-                    check = false;
                     return true;
                 }
             }
         }
     }
-    if(check){
-        if(isSafe(grid, baseRow , baseCol, value)){ 
-            grid[baseRow][baseCol].commitValue(value);
-            if(!removeInPeers(grid, baseRow, baseCol, value)){
-                return false;
-            }
+    if(isSafe(grid, baseRow , baseCol, value)){ 
+        grid[baseRow][baseCol].commitValue(value);
+        if(!removeInPeers(grid, baseRow, baseCol, value)){
+            return false;
         }
     }
     return true;
@@ -96,33 +86,29 @@ bool checkforUniqueInRow(Square **grid, const int baseRow, const int baseCol, in
 
 bool checkforUniqueInBox(Square **grid, const int baseRow, const int baseCol, int value){
     //Check in Box
-    bool check = true;
-    int box_start_row =  baseRow - baseRow % 3;
-    int box_start_col = baseCol - baseCol % 3;
+    const int box_start_row =  baseRow - baseRow % 3;
+    const int box_start_col = baseCol - baseCol % 3;
     for (int row = 0; row < 3; row++){
         for (int col = 0; col < 3; col++){
             if(box_start_row + row != baseRow || box_start_col + col != baseCol){
                 if(grid[box_start_row + row ][box_start_col + col].possibleValues.size() == 0){
                     if(value == grid[box_start_row + row ][box_start_col + col].getCommitValue()){
-                        check = false;
                         return true;            
                     }
                 }
                 for (int peerValue : grid[box_start_row + row ][box_start_col + col].possibleValues){
                     if(value == peerValue){
-                        check = false;
                         return true;
                     }              
                 }  
             }
         }
     }  
-    if(check){
-        if(isSafe(grid, baseRow , baseCol, value)){ 
-            grid[baseRow][baseCol].commitValue(value);
-            if(!removeInPeers(grid, baseRow, baseCol, value)){
-                return false;
-            }
+    
+    if(isSafe(grid, baseRow , baseCol, value)){ 
+        grid[baseRow][baseCol].commitValue(value);
+        if(!removeInPeers(grid, baseRow, baseCol, value)){
+            return false;
         }
     }
     return true;
@@ -149,15 +135,15 @@ bool checkForUniqueInUnits(Square **grid, const int baseRow, const int baseCol){
 
 bool removeInBox(Square **grid, const int baseRow, const int  baseCol, const int value){
     //Remove value from peers in box-unit
-    int box_start_row =  baseRow - baseRow % 3;
-    int box_start_col = baseCol - baseCol % 3;
-
-    for (int row = 0; row < 3; row++){
-		for (int col = 0; col < 3; col++){
+    const int box_start_row =  baseRow - baseRow % 3;
+    const int box_start_col = baseCol - baseCol % 3;
+    bool noProblemFound = true;
+    for (int row = 0; row < 3 && noProblemFound; row++){
+		for (int col = 0; col < 3 && noProblemFound; col++){
             auto &square = grid[box_start_row + row ][box_start_col+col];
             if(box_start_row + row != baseRow || box_start_col + col != baseCol){
                 if(square.getNumberOfPossibles() == 1 && square.possibleValues[0] == value ){
-                    return false;
+                    noProblemFound = false;
                 }                
                 grid[box_start_row + row ][box_start_col+col].removePossibleValue(value);
 
@@ -165,7 +151,7 @@ bool removeInBox(Square **grid, const int baseRow, const int  baseCol, const int
                     if(isSafe(grid, box_start_row + row, box_start_col+col, square.possibleValues[0])){    
                         square.commitValue(square.possibleValues[0]);
                         if(!removeInPeers(grid,box_start_row + row,box_start_col+col, square.getCommitValue())){
-                            return false;
+                            noProblemFound = false;
                         }
                     } 
                 }
@@ -175,16 +161,17 @@ bool removeInBox(Square **grid, const int baseRow, const int  baseCol, const int
             }
         }
     }
-    return true;
+    return noProblemFound;
 }
 
 bool removeInCol(Square **grid, const int baseRow, const int  baseCol, const int value){
     //Remove value from peers in col-unit
-    for(int row = 0; row < 9; row++){
+    bool noProblemFound = true;
+    for(int row = 0; row < 9 && noProblemFound; row++){
         auto &square = grid[row][baseCol];
         if(row != baseRow){
             if(square.getNumberOfPossibles() == 1 && square.possibleValues[0] == value){
-                return false;
+                noProblemFound = false;
             }
             square.removePossibleValue(value); 
 
@@ -192,7 +179,7 @@ bool removeInCol(Square **grid, const int baseRow, const int  baseCol, const int
                 if(isSafe(grid, row , baseCol, square.possibleValues[0])){ 
                     square.commitValue(square.possibleValues[0]);
                     if(!removeInPeers(grid, row, baseCol,square.getCommitValue())){
-                        return false;
+                        noProblemFound = false;
                     }
                 }
             }
@@ -201,16 +188,17 @@ bool removeInCol(Square **grid, const int baseRow, const int  baseCol, const int
             }*/   
         }
     }
-    return true;
+    return noProblemFound;
 }
 
 bool removeInRow(Square **grid, const int baseRow, const int  baseCol, const int value){
     //Remove value from peers in row-unit
-    for(int col = 0; col < 9; col++){
+    bool noProblemFound = true;
+    for(int col = 0; col < 9 && noProblemFound; col++){
         auto &square = grid[baseRow][col];
         if(col != baseCol){
             if(square.getNumberOfPossibles() == 1 && square.possibleValues[0] == value){
-                return false;
+                noProblemFound = false;
             }
             square.removePossibleValue(value);
 
@@ -218,7 +206,7 @@ bool removeInRow(Square **grid, const int baseRow, const int  baseCol, const int
                 if(isSafe(grid, baseRow , col, square.possibleValues[0])){  
                     square.commitValue(square.possibleValues[0]);
                     if(!removeInPeers(grid, baseRow, col, square.getCommitValue())){
-                        return false;
+                        noProblemFound = false;
                     }
                 }
             }
@@ -227,7 +215,7 @@ bool removeInRow(Square **grid, const int baseRow, const int  baseCol, const int
             }*/
         }
     }
-    return true;
+    return noProblemFound;
 }
 
 bool removeInPeers(Square **grid, const int baseRow, const int  baseCol, const int value){
