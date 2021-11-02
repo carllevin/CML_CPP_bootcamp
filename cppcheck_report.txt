@@ -76,10 +76,7 @@ Day18/SudokuBuild/build/CMakeFiles/3.16.3/CompilerIdCXX/CMakeCXXCompilerId.cpp:5
 Day18/SudokuBuild/build/CMakeFiles/3.16.3/CompilerIdCXX/CMakeCXXCompilerId.cpp:557:0: information: Skipping configuration '_MSC_FULL_VER;_MSC_VER' since the value of '_MSC_VER' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
   '.', COMPILER_VERSION_MINOR,
 ^
-MiniProject/FinalSudoku/include/NorvigSudoku.hpp:29:13: style:inconclusive: Technically the member function 'Square::getCommitValue' can be const. [functionConst]
-        int getCommitValue(){
-            ^
-MiniProject/FinalSudoku/include/NorvigSudoku.hpp:32:13: style:inconclusive: Technically the member function 'Square::getNumberOfPossibles' can be const. [functionConst]
+MiniProject/FinalSudoku/include/NorvigSudoku.hpp:29:13: style:inconclusive: Technically the member function 'Square::getNumberOfPossibles' can be const. [functionConst]
         int getNumberOfPossibles(){
             ^
 MiniProject/FinalSudoku/include/NorvigSudoku.hpp:23:14: style:inconclusive: Technically the member function 'Square::printPossibleValues' can be const. [functionConst]
