@@ -82,52 +82,115 @@ MiniProject/FinalSudoku/include/NorvigSudoku.hpp:29:13: style:inconclusive: Tech
 MiniProject/FinalSudoku/include/NorvigSudoku.hpp:23:14: style:inconclusive: Technically the member function 'Square::printPossibleValues' can be const. [functionConst]
         void printPossibleValues();
              ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:387:14: note: Technically the member function 'Square::printPossibleValues' can be const.
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:399:14: note: Technically the member function 'Square::printPossibleValues' can be const.
 void Square::printPossibleValues(){
              ^
 MiniProject/FinalSudoku/include/NorvigSudoku.hpp:23:14: note: Technically the member function 'Square::printPossibleValues' can be const.
         void printPossibleValues();
              ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:257:31: style: Condition '!leastFound' is always true [knownConditionTrueFalse]
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:269:31: style: Condition '!leastFound' is always true [knownConditionTrueFalse]
  for (int row = 0; row < 9 && !leastFound; row++)
                               ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:256:23: note: Assignment 'leastFound=false', assigned value is 0
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:268:23: note: Assignment 'leastFound=false', assigned value is 0
     bool leastFound = false;
                       ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:257:31: note: Condition '!leastFound' is always true
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:269:31: note: Condition '!leastFound' is always true
  for (int row = 0; row < 9 && !leastFound; row++)
                               ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:258:32: style: Condition '!leastFound' is always true [knownConditionTrueFalse]
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:270:32: style: Condition '!leastFound' is always true [knownConditionTrueFalse]
   for (int col = 0; col < 9 && !leastFound; col++)
                                ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:256:23: note: Assignment 'leastFound=false', assigned value is 0
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:268:23: note: Assignment 'leastFound=false', assigned value is 0
     bool leastFound = false;
                       ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:258:32: note: Condition '!leastFound' is always true
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:270:32: note: Condition '!leastFound' is always true
   for (int col = 0; col < 9 && !leastFound; col++)
                                ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:143:19: style: The scope of the variable 'square' can be reduced. [variableScope]
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:163:19: style: The scope of the variable 'square' can be reduced. [variableScope]
             auto &square = grid[box_start_row + row ][box_start_col+col];
                   ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:171:15: style: The scope of the variable 'square' can be reduced. [variableScope]
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:193:15: style: The scope of the variable 'square' can be reduced. [variableScope]
         auto &square = grid[row][baseCol];
               ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:198:15: style: The scope of the variable 'square' can be reduced. [variableScope]
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:222:15: style: The scope of the variable 'square' can be reduced. [variableScope]
         auto &square = grid[baseRow][col];
               ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:369:30: performance: Function parameter 's' should be passed by const reference. [passedByValue]
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:381:30: performance: Function parameter 's' should be passed by const reference. [passedByValue]
 void solveSudoku(std::string s){
                              ^
 MiniProject/FinalSudoku/src/NorvigSudoku.cpp:48:39: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
                 if(value == peerValue){
                                       ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:72:39: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:79:39: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
                 if(value == peerValue){
                                       ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:100:43: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:114:43: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
                     if(value == peerValue){
                                           ^
-MiniProject/FinalSudoku/src/NorvigSudoku.cpp:264:28: style: Variable 'leastFound' is assigned a value that is never used. [unreadVariable]
+MiniProject/FinalSudoku/src/NorvigSudoku.cpp:276:28: style: Variable 'leastFound' is assigned a value that is never used. [unreadVariable]
+                leastFound = true;
+                           ^
+MiniProject/Old/DifferentCheckUnique/include/NorvigSudoku.hpp:29:13: style:inconclusive: Technically the member function 'Square::getNumberOfPossibles' can be const. [functionConst]
+        int getNumberOfPossibles(){
+            ^
+MiniProject/Old/DifferentCheckUnique/include/NorvigSudoku.hpp:23:14: style:inconclusive: Technically the member function 'Square::printPossibleValues' can be const. [functionConst]
+        void printPossibleValues();
+             ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:543:14: note: Technically the member function 'Square::printPossibleValues' can be const.
+void Square::printPossibleValues(){
+             ^
+MiniProject/Old/DifferentCheckUnique/include/NorvigSudoku.hpp:23:14: note: Technically the member function 'Square::printPossibleValues' can be const.
+        void printPossibleValues();
+             ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:413:31: style: Condition '!leastFound' is always true [knownConditionTrueFalse]
+ for (int row = 0; row < 9 && !leastFound; row++)
+                              ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:412:23: note: Assignment 'leastFound=false', assigned value is 0
+    bool leastFound = false;
+                      ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:413:31: note: Condition '!leastFound' is always true
+ for (int row = 0; row < 9 && !leastFound; row++)
+                              ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:414:32: style: Condition '!leastFound' is always true [knownConditionTrueFalse]
+  for (int col = 0; col < 9 && !leastFound; col++)
+                               ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:412:23: note: Assignment 'leastFound=false', assigned value is 0
+    bool leastFound = false;
+                      ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:414:32: note: Condition '!leastFound' is always true
+  for (int col = 0; col < 9 && !leastFound; col++)
+                               ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:302:19: style: The scope of the variable 'square' can be reduced. [variableScope]
+            auto &square = grid[box_start_row + row ][box_start_col+col];
+                  ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:332:15: style: The scope of the variable 'square' can be reduced. [variableScope]
+        auto &square = grid[row][baseCol];
+              ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:361:15: style: The scope of the variable 'square' can be reduced. [variableScope]
+        auto &square = grid[baseRow][col];
+              ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:525:30: performance: Function parameter 's' should be passed by const reference. [passedByValue]
+void solveSudoku(std::string s){
+                             ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:48:39: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
+                if(value == peerValue){
+                                      ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:79:39: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
+                if(value == peerValue){
+                                      ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:114:43: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
+                    if(value == peerValue){
+                                          ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:149:39: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
+                if(value == peerValue){
+                                      ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:187:39: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
+                if(value == peerValue){
+                                      ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:230:47: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
+                        if(value == peerValue){
+                                              ^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:420:28: style: Variable 'leastFound' is assigned a value that is never used. [unreadVariable]
                 leastFound = true;
                            ^
 MiniProject/Old/NorvigSudoku.cpp:23:14: style:inconclusive: Technically the member function 'Square::printPossibleValues' can be const. [functionConst]
@@ -205,7 +268,7 @@ WeekOne/DayTwo/LearningEnums.cpp:9:16: note: Condition 'payMeth==PaymentMethod::
 WeekOne/DayTwo/LearningPointers.cpp:7:5: error: Memory leak: b [memleak]
     b = &a;
     ^
-WeekThree/RandomDuplicate.cpp:12:9: style: The scope of the variable 'randNumber' can be reduced. [variableScope]
+WeekThree/RandomDuplicate.cpp:15:9: style: The scope of the variable 'randNumber' can be reduced. [variableScope]
     int randNumber;
         ^
 WeekThree/ShapeCompareTemplate.cpp:9:14: style:inconclusive: Technically the member function 'Shape::operator>' can be const. [functionConst]
@@ -268,6 +331,15 @@ class Square: public Shape{
 Day18/ShapeBuild/Shape.hpp:36:1: error: The one definition rule is violated, different classes/structs have the same name 'Square' [ctuOneDefinitionRuleViolation]
 class Square: public Shape{
 ^
+MiniProject/Old/DifferentCheckUnique/include/NorvigSudoku.hpp:12:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
+class Square{
+^
+Day18/ShapeBuild/Shape.hpp:36:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
+class Square: public Shape{
+^
+Day18/ShapeBuild/Shape.hpp:36:1: error: The one definition rule is violated, different classes/structs have the same name 'Square' [ctuOneDefinitionRuleViolation]
+class Square: public Shape{
+^
 MiniProject/Old/NorvigSudoku.cpp:12:1: note: The one definition rule is violated, different classes/structs have the same name 'Square'
 class Square{
 ^
@@ -282,6 +354,9 @@ class Circle: public Shape{
 ^
 Day18/ShapeBuild/Shape.hpp:15:1: note: The one definition rule is violated, different classes/structs have the same name 'Circle'
 class Circle: public Shape{
+^
+MiniProject/Old/DifferentCheckUnique/src/NorvigSudoku.cpp:278:0: style: The function 'checkForUniqueInUnits2' is never used. [unusedFunction]
+
 ^
 nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingIncludeSystem]
 
