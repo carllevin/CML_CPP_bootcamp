@@ -1,23 +1,33 @@
 #include <iostream> 
 #include <vector> 
+#include <map>
+#include<time.h>
+#include <iterator>
 
-/* Generaterandomnumbersbetween0-33,tenthousandtimes,thenprinthowmanyduplicatesofeachnumber
-youhavegenerated--printinascendingorder. */
+/* Generate randomnumbers between 0-33,tenthousand times,then print how many duplicates of each number
+you have generated--print in ascending order. */
 
-//Fix it with a map. Or was it multimap?
 
 int main() {
-    std::vector<int> duplicates(34);
+    srand(time(0));
+    std::vector<int> duplicatesVector(34);
     std::vector<int> numbers;
     int randNumber;
 
     for(int i=0; i < 10000; i++) {
         randNumber = rand() % 34;
         numbers.push_back(randNumber);
-        duplicates[randNumber] = duplicates[randNumber] + 1;
+        duplicatesVector[randNumber] = duplicatesVector[randNumber] + 1;
     }
 
-    for(int i = 0; i<34; i++){
-        std::cout << "Number of duplicates of " << i << " is " << duplicates[i] << std::endl;
+    std::multimap<int, int> duplicatesMap;
+
+    for(int i = 0; i < 34; i++){
+        duplicatesMap.insert(std::pair <int, int> (duplicatesVector[i], i));
+
+    }
+
+    for (auto itr = duplicatesMap.begin(); itr != duplicatesMap.end(); ++itr) {
+        std::cout << itr->first << '\t' << itr->second << '\n';
     }
 }
