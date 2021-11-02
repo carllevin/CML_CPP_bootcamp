@@ -1,26 +1,26 @@
 #include "../include/NorvigSudoku.hpp"
 int numberOfGuesses;
 
-bool used_in_row(Square **grid, const int row, const int value){
+bool usedInRow(Square **grid, const int row, const int value){
 	for (int col = 0; col < 9; col++)
-		if (grid[row][col].getCommitValue() == value){
+		if (grid[row][col].commitVal == value){
 			return true;
 		}
 	return false;
 }
 
-bool used_in_col(Square **grid, const int col, const int value){
+bool usedInCol(Square **grid, const int col, const int value){
 	for (int row = 0; row < 9; row++)
-		if (grid[row][col].getCommitValue() == value){
+		if (grid[row][col].commitVal == value){
 			return true;
 		}
 	return false;
 }
 
-bool used_in_box(Square **grid, const int box_start_rpw, const int box_start_col, const int value){
+bool usedInBox(Square **grid, const int box_start_rpw, const int box_start_col, const int value){
 	for (int row = 0; row < 3; row++)
 		for (int col = 0; col < 3; col++)
-			if (grid[row + box_start_rpw][col + box_start_col].getCommitValue()  == value){
+			if (grid[row + box_start_rpw][col + box_start_col].commitVal  == value){
 				return true;
 			}
 	return false;
@@ -30,9 +30,9 @@ bool isSafe(Square **grid, const int row, const int col, const int num){
 // Returns a boolean which indicates whether it will be legal to assign
 // num to the given row,col location.
 
-	return !used_in_row(grid, row, num) &&
-		!used_in_col(grid, col, num) &&
-		!used_in_box(grid, row - row % 3, col - col % 3, num);
+	return !usedInRow(grid, row, num) &&
+		!usedInCol(grid, col, num) &&
+		!usedInBox(grid, row - row % 3, col - col % 3, num);
 }
 
 bool checkforUniqueInCol(Square **grid, const int baseRow, const int baseCol, int value){
@@ -40,7 +40,7 @@ bool checkforUniqueInCol(Square **grid, const int baseRow, const int baseCol, in
     for(int row = 0; row < 9; row++){
         if(row != baseRow){
             if(grid[row][baseCol].possibleValues.size() == 0){
-                if(value == grid[row][baseCol].getCommitValue()){
+                if(value == grid[row][baseCol].commitVal){
                     return true;
                 }
             }
@@ -64,7 +64,7 @@ bool checkforUniqueInRow(Square **grid, const int baseRow, const int baseCol, in
     for(int col = 0; col < 9; col++){
         if(col != baseCol){
             if(grid[baseRow][col].possibleValues.size() == 0){
-                if(value == grid[baseRow][col].getCommitValue()){
+                if(value == grid[baseRow][col].commitVal){
                     return true;
                 }
             }
@@ -92,7 +92,7 @@ bool checkforUniqueInBox(Square **grid, const int baseRow, const int baseCol, in
         for (int col = 0; col < 3; col++){
             if(box_start_row + row != baseRow || box_start_col + col != baseCol){
                 if(grid[box_start_row + row ][box_start_col + col].possibleValues.size() == 0){
-                    if(value == grid[box_start_row + row ][box_start_col + col].getCommitValue()){
+                    if(value == grid[box_start_row + row ][box_start_col + col].commitVal){
                         return true;            
                     }
                 }
@@ -150,7 +150,7 @@ bool removeInBox(Square **grid, const int baseRow, const int  baseCol, const int
                 if(square.getNumberOfPossibles() == 1){
                     if(isSafe(grid, box_start_row + row, box_start_col+col, square.possibleValues[0])){    
                         square.commitValue(square.possibleValues[0]);
-                        if(!removeInPeers(grid,box_start_row + row,box_start_col+col, square.getCommitValue())){
+                        if(!removeInPeers(grid,box_start_row + row,box_start_col+col, square.commitVal)){
                             noProblemFound = false;
                         }
                     } 
@@ -178,7 +178,7 @@ bool removeInCol(Square **grid, const int baseRow, const int  baseCol, const int
             if(square.getNumberOfPossibles() == 1){
                 if(isSafe(grid, row , baseCol, square.possibleValues[0])){ 
                     square.commitValue(square.possibleValues[0]);
-                    if(!removeInPeers(grid, row, baseCol,square.getCommitValue())){
+                    if(!removeInPeers(grid, row, baseCol,square.commitVal)){
                         noProblemFound = false;
                     }
                 }
@@ -205,7 +205,7 @@ bool removeInRow(Square **grid, const int baseRow, const int  baseCol, const int
             if(square.getNumberOfPossibles() == 1){
                 if(isSafe(grid, baseRow , col, square.possibleValues[0])){  
                     square.commitValue(square.possibleValues[0]);
-                    if(!removeInPeers(grid, baseRow, col, square.getCommitValue())){
+                    if(!removeInPeers(grid, baseRow, col, square.commitVal)){
                         noProblemFound = false;
                     }
                 }
@@ -224,7 +224,7 @@ bool removeInPeers(Square **grid, const int baseRow, const int  baseCol, const i
       removeInRow(grid, baseRow, baseCol, value))){
           return false;
       }
-
+    
     //Rule no 2
     for(int i = 0; i <9; i++){
         for(int j = 0; j < 9; j++){
@@ -320,7 +320,7 @@ int parseAndConstraintPropagation(Square **grid, std::string s){
     for(char c : s){
         if(c != '.'){
             grid[row][col].commitValue(c - '0');  
-            if(removeInPeers(grid,row,col,grid[row][col].getCommitValue())){
+            if(removeInPeers(grid,row,col,grid[row][col].commitVal)){
 
             }  
         }

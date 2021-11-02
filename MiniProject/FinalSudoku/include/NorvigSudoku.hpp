@@ -19,19 +19,16 @@ class Square{
         }
         void removePossibleValue(int value){
             possibleValues.erase(std::remove(possibleValues.begin(), possibleValues.end(), value), possibleValues.end());
-        };
+        }
         void printPossibleValues();
         
         void commitValue(int value){
             this->commitVal = value;
             this->possibleValues.clear();
         }
-        int getCommitValue(){
-            return commitVal;
-        }
         int getNumberOfPossibles(){
             return possibleValues.size();
-        };
+        }
 };
 
 bool used_in_row(Square **grid, const int row, const int value);
