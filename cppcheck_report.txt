@@ -205,7 +205,7 @@ WeekOne/DayTwo/LearningEnums.cpp:9:16: note: Condition 'payMeth==PaymentMethod::
 WeekOne/DayTwo/LearningPointers.cpp:7:5: error: Memory leak: b [memleak]
     b = &a;
     ^
-WeekThree/RandomDuplicate.cpp:12:9: style: The scope of the variable 'randNumber' can be reduced. [variableScope]
+WeekThree/RandomDuplicate.cpp:15:9: style: The scope of the variable 'randNumber' can be reduced. [variableScope]
     int randNumber;
         ^
 WeekThree/ShapeCompareTemplate.cpp:9:14: style:inconclusive: Technically the member function 'Shape::operator>' can be const. [functionConst]
