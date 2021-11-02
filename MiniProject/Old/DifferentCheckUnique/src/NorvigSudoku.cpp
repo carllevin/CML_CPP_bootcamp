@@ -134,6 +134,128 @@ bool checkforUniqueInBox(Square **grid, const int baseRow, const int baseCol, in
     return true;
 }
 
+bool checkforUniqueInCol2(Square **grid, const int value){
+    //Check in Cols
+    for(int col = 0; col < 9; col++){
+        int numberOfTimesInPossibles = 0;
+        int rowWithUnique;
+        for(int row = 0; row < 9; row++){
+            if(grid[row][col].possibleValues.size() == 0){
+                if(value == grid[row][col].commitVal){
+                    break;
+                }
+            }
+            for(int peerValue : grid[row][col].possibleValues){
+                if(value == peerValue){
+                    rowWithUnique = row;
+                    numberOfTimesInPossibles++;
+                    break;
+                }
+            }
+            if(numberOfTimesInPossibles > 1){
+                break;
+            } 
+        }
+        if(numberOfTimesInPossibles == 1){
+            if(isSafe(grid, rowWithUnique , col, value)){ 
+                grid[rowWithUnique][col].commitValue(value);
+                if(!removeInPeers(grid, rowWithUnique, col, value)){
+                    return false;
+                }
+            } else{
+                return false;
+            }
+            
+        }
+
+    }
+    return true;
+}
+
+bool checkforUniqueInRow2(Square **grid, const int value){
+    //Check in rows
+    int colWithUnique;
+    for(int row = 0; row < 9; row++){
+        int numberOfTimesInPossibles = 0;
+        for(int col = 0; col < 9; col++){
+            if(grid[row][col].possibleValues.size() == 0){
+                if(value == grid[row][col].commitVal){
+                    break;
+                }
+            }
+            for(int peerValue : grid[row][col].possibleValues){
+                if(value == peerValue){
+                    colWithUnique = col;
+                    numberOfTimesInPossibles++;
+                    break;
+                }
+            }
+            if(numberOfTimesInPossibles > 1){
+                break;
+            } 
+        }
+        if(numberOfTimesInPossibles == 1){
+            if(isSafe(grid, row , colWithUnique, value)){ 
+                grid[row][colWithUnique].commitValue(value);
+                if(!removeInPeers(grid, row, colWithUnique, value)){
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+
+    }
+    return true;
+}
+
+bool checkforUniqueInBox2(Square **grid, const int value){
+    for(int box_start_row = 0; box_start_row < 9; box_start_row = box_start_row + 3){
+        for(int box_start_col = 0; box_start_col < 9; box_start_col = box_start_col + 3){
+            int numberOfTimesInPossibles = 0;
+            bool notUnique = false;
+            int boxWithUniqueRow;
+            int boxWithUniqueCol;
+            for (int row = 0; row < 3 && !notUnique; row++){
+                for (int col = 0; col < 3 && !notUnique; col++){
+
+                    if(grid[box_start_row+row][box_start_col+col].possibleValues.size() == 0){
+                        if(value == grid[box_start_row+row][box_start_col+col].commitVal){
+                            notUnique = true;
+                            break;
+                        }
+                    }
+
+                    for(int peerValue : grid[box_start_row+row][box_start_col+col].possibleValues){
+                        if(value == peerValue){
+                            boxWithUniqueRow = box_start_row+row;
+                            boxWithUniqueCol = box_start_col+col;
+                            numberOfTimesInPossibles++;
+                            break;
+                        }
+                    }
+                    if(numberOfTimesInPossibles > 1){
+                        notUnique = true;
+                        break;
+                    } 
+                }
+            }
+            if(numberOfTimesInPossibles == 1){
+                if(isSafe(grid, boxWithUniqueRow , boxWithUniqueCol, value)){ 
+                    grid[boxWithUniqueRow][boxWithUniqueCol].commitValue(value);
+                    if(!removeInPeers(grid, boxWithUniqueRow, boxWithUniqueCol, value)){
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
+                
+        }
+    }
+    return true;
+}
+
 bool checkForUniqueInUnits(Square **grid, const int baseRow, const int baseCol){
     if (grid[baseRow][baseCol].getNumberOfPossibles() > 1){
         for(int value : grid[baseRow][baseCol].possibleValues){
@@ -150,6 +272,23 @@ bool checkForUniqueInUnits(Square **grid, const int baseRow, const int baseCol){
             }
         }
     } 
+    return true;
+}
+
+bool checkForUniqueInUnits2(Square **grid){
+        for(int value = 1; value < 10; value++){
+            //Check in Col
+            if(!checkforUniqueInCol2(grid, value)){
+                return false;
+            }
+            //Check in Row
+            if(!checkforUniqueInRow2(grid, value)){
+                return false;
+            }
+            if(!checkforUniqueInBox2(grid, value)){
+                return false;
+            }
+        }
     return true;
 }
 
@@ -259,6 +398,11 @@ bool removeInPeers(Square **grid, const int baseRow, const int  baseCol, const i
             }
         }
     }
+
+    /*if(!checkForUniqueInUnits2(grid)){
+        return false;
+    }*/
+    
     return true;
 }
 
